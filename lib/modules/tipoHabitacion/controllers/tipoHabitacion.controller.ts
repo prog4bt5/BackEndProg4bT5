@@ -6,7 +6,8 @@ import { exec } from 'child_process';
 export class TipoHabitacionController {
     crearTipoHabitacion = (req: Request, res: Response) => {
         const nuevaTipoHabitacion = new TipoHabitacion({
-            tipoHabitacion: req.body.tipoHabitacion
+            tipoHabitacion: req.body.tipoHabitacion,
+            costo: req.body.costo
         });
 
         nuevaTipoHabitacion.save()
@@ -29,10 +30,10 @@ export class TipoHabitacionController {
 
     obtenerTipoHabitacions = (req: Request, res: Response) => {
         TipoHabitacion.find()
-        .then(tipoHabitacions => {
+        .then(tipoHabitaciones => {
             res.status(200).json({
                 ok: true,
-                tipoHabitacions: tipoHabitacions
+                tipoHabitaciones: tipoHabitaciones
             });
             /*
                 [
@@ -57,7 +58,8 @@ export class TipoHabitacionController {
 
     actualizarTipoHabitacion = (req: Request, res: Response) => {
         TipoHabitacion.findByIdAndUpdate(req.params.id,{
-            tipoHabitacion: req.body.tipoHabitacion
+            tipoHabitacion: req.body.tipoHabitacion,
+            costo: req.body.costo
         })
         .exec()
         .then(tipoHabitacionActualizada => {
